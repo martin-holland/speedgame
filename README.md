@@ -22,8 +22,7 @@ Live page [here](https://github.com/margittennosaar/markdown_study_materials)
 
 ## Sources
 
-- [GitHub Guides - masterin markdown](https://guides.github.com/features/mastering-markdown/)
-- [Make a README](https://www.makeareadme.com/)
+- Stickers made by <a href="https://www.flaticon.com/authors/stickers" title="Stickers">Stickers</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com
 
 ## Authors and acknowledgment
 
