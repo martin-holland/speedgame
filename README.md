@@ -1,7 +1,6 @@
-# Project title
+# Speedgame
 
-A short description of this project.
-What it is about, who are target group and why that project was made.
+Small speedgame made with JS, CSS, HTML primarily showcasing conditional rendering in a game type environment. Super fun!
 
 ## Technologies used
 
@@ -16,17 +15,14 @@ Built with:
 
 ## Setup and usage
 
-Live page [here](https://github.com/margittennosaar/markdown_study_materials)
-
 ## Screenshot
 
 ## Sources
 
-- Stickers made by <a href="https://www.flaticon.com/authors/stickers" title="Stickers">Stickers</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com
+<a href='https://www.freepik.com/photos/black'>Black photo created by rawpixel.com - www.freepik.com</a>
 
 ## Authors and acknowledgment
 
-Margit Tennosaar
+Martin Holland
 
-- GitHub @margittennosaar
-- [LinkedIn](https://www.linkedin.com/in/margittennosaar/)
+- GitHub @martin-holland

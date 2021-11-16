@@ -2,7 +2,7 @@ import "./App.css";
 import Circle from "./components/Circle.js";
 import { circles } from "./components/circles";
 import React, { Component } from "react";
-import { getAllByRole } from "@testing-library/react";
+import Gameover from "./components/Gameover";
 
 const getRndInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -12,12 +12,19 @@ class App extends Component {
   state = {
     score: 0,
     current: 0,
+    gameOver: false,
+    pace: 1500,
   };
 
   timer = undefined;
-  pace = 1500;
 
-  clickHandler = () => {
+  clickHandler = (id) => {
+    console.log("you clicked: ", id);
+
+    if (this.state.current !== id) {
+      this.stopHandler();
+      return;
+    }
     this.setState({
       score: this.state.score + 10,
     });
@@ -31,10 +38,10 @@ class App extends Component {
     } while (nextActive === this.state.current);
     this.setState({
       current: nextActive,
+      pace: this.state.pace * 0.95,
     });
 
-    this.pace *= 0.95;
-    this.timer = setTimeout(this.nextCircle, this.pace);
+    this.timer = setTimeout(this.nextCircle, this.state.pace);
     console.log("Active Circle is ", this.state.current);
   };
 
@@ -44,11 +51,26 @@ class App extends Component {
 
   stopHandler = () => {
     clearTimeout(this.timer);
+    this.setState({
+      gameOver: true,
+      current: 0,
+    });
+  };
+
+  closeHandler = () => {
+    this.setState({
+      gameOver: false,
+      score: 0,
+      pace: 1500,
+    });
   };
 
   render() {
     return (
       <div className="App">
+        {this.state.gameOver && (
+          <Gameover score={this.state.score} close={this.closeHandler} />
+        )}
         <h1>Speed Game</h1>
         <div className="gamearea">
           <div className="circlearea">
@@ -57,7 +79,8 @@ class App extends Component {
                 key={c.id}
                 color={c.color}
                 id={c.id}
-                click={this.clickHandler}
+                click={() => this.clickHandler(c.id)}
+                active={this.state.current === c.id}
               />
             ))}
           </div>
