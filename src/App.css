@@ -2,9 +2,11 @@
 
 body {
   font-family: "Odibee Sans", cursive;
-  background-color: #f7b42c;
-  background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
-
+  /* background-color: #f9ea8f;
+  background-image: linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%); */
+  background-image: url("./assets/images/background_nature.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
   height: 100vh;
 }
 .App {
@@ -16,6 +18,18 @@ body {
 h1 {
   font-size: 3rem;
   text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  /* color: #5aa824; */
+  color: #64947c;
+  letter-spacing: 5px;
+  text-shadow: 2px 0 #5aa824, -2px#5aa824, 0 2#5aa824, 0 -2#5aa824, 1px 1#5aa824,
+    -1px -1#5aa824, -1px 1#5aa824, 1px -1#5aa824;
 }
 
 button {
@@ -34,6 +48,14 @@ button:hover {
   background-color: green;
 }
 
+button[disabled] {
+  opacity: 30%;
+}
+button[disabled]:hover {
+  opacity: 30%;
+  background-color: rgb(29, 29, 29);
+}
+
 .buttoncontainer {
   display: flex;
   justify-content: center;
@@ -44,12 +66,19 @@ button:hover {
   height: 150px;
   width: 150px;
   background-color: black;
-  border: solid 1px;
+  border: solid black 1px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 1rem;
   color: black;
+  box-shadow: inset 0 0 5px black;
+  cursor: url("./assets/images/watering-can.png"), default;
+}
+
+.circle:active {
+  box-shadow: 0 0 15px rgb(2, 123, 252);
+  border: inset rgb(2, 123, 252) 10px;
 }
 
 .circle p {
@@ -68,8 +97,9 @@ button:hover {
 
 .active {
   box-sizing: border-box;
-  box-shadow: 0 0 25px greenyellow;
-  border: 20px solid greenyellow;
+  /* box-shadow: 0 0 25px greenyellow;
+  border: 20px solid greenyellow; */
+  background: url("assets/images/plant.svg");
 }
 .gameover {
   display: flex;
@@ -78,7 +108,7 @@ button:hover {
   background-color: rgb(96, 95, 95, 0.8);
   width: 120vw;
   height: 120vh;
-  position: absolute;
+  position: fixed;
   overflow: hidden;
 }
 
@@ -97,7 +127,7 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(./assets/bubbles-black-background.jpg);
+  background-image: url(./assets/images/background.jpeg);
   background-size: 45vw;
   height: 40vh;
   width: 40vw;
@@ -105,6 +135,6 @@ button:hover {
   font-size: 2rem;
   border-radius: 10px;
   color: white;
-  text-shadow: 2px 0 blue, -2px 0 blue, 0 2px blue, 0 -2px blue, 1px 1px blue,
-    -1px -1px blue, -1px 1px blue, 1px -1px blue;
+  text-shadow: 2px#5aa824, -2px#5aa824, 0 2#5aa824, 0 -2#5aa824, 1px 1#5aa824,
+    -1px -1#5aa824, -1px 1#5aa824, 1px -1#5aa824;
 }

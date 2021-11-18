@@ -4,6 +4,12 @@ import { circles } from "./components/circles";
 import React, { Component } from "react";
 import Gameover from "./components/Gameover";
 
+import gameover from "./assets/sounds/gameover.mp3";
+import bgSound from "./assets/sounds/bg.mp3";
+
+let gameStartSound = new Audio(bgSound);
+let gameOverSound = new Audio(gameover);
+
 const getRndInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
@@ -14,6 +20,8 @@ class App extends Component {
     current: 0,
     gameOver: false,
     pace: 1500,
+    rounds: 0,
+    gameStart: false,
   };
 
   timer = undefined;
@@ -27,10 +35,15 @@ class App extends Component {
     }
     this.setState({
       score: this.state.score + 10,
+      rounds: 0,
     });
   };
 
   nextCircle = () => {
+    if (this.state.rounds >= 5) {
+      this.stopHandler();
+      return;
+    }
     let nextActive;
 
     do {
@@ -39,21 +52,31 @@ class App extends Component {
     this.setState({
       current: nextActive,
       pace: this.state.pace * 0.95,
+      rounds: this.state.rounds + 1,
     });
 
     this.timer = setTimeout(this.nextCircle, this.state.pace);
     console.log("Active Circle is ", this.state.current);
+    console.log("Rounds number: ", this.state.rounds);
   };
 
   startHandler = () => {
+    gameStartSound.play();
+    gameStartSound.loop = true;
     this.nextCircle();
+    this.setState({
+      gameStart: true,
+    });
   };
 
   stopHandler = () => {
+    gameStartSound.pause();
+    gameOverSound.play();
     clearTimeout(this.timer);
     this.setState({
       gameOver: true,
       current: 0,
+      gameStart: false,
     });
   };
 
@@ -62,6 +85,7 @@ class App extends Component {
       gameOver: false,
       score: 0,
       pace: 1500,
+      rounds: 0,
     });
   };
 
@@ -71,7 +95,7 @@ class App extends Component {
         {this.state.gameOver && (
           <Gameover score={this.state.score} close={this.closeHandler} />
         )}
-        <h1>Speed Game</h1>
+        <h1>Water the plants!</h1>
         <div className="gamearea">
           <div className="circlearea">
             {circles.map((c) => (
@@ -81,11 +105,16 @@ class App extends Component {
                 id={c.id}
                 click={() => this.clickHandler(c.id)}
                 active={this.state.current === c.id}
+                disabled={this.state.gameStart}
               />
             ))}
           </div>
           <div className="buttoncontainer">
-            <button className="start" onClick={this.startHandler}>
+            <button
+              disabled={this.state.gameStart}
+              className="start"
+              onClick={this.startHandler}
+            >
               Start
             </button>
             <button className="stop" onClick={this.stopHandler}>
