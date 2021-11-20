@@ -6,9 +6,11 @@ import Gameover from "./components/Gameover";
 
 import gameover from "./assets/sounds/gameover.mp3";
 import bgSound from "./assets/sounds/bg.mp3";
+import click from "./assets/sounds/water.mp3";
 
 let gameStartSound = new Audio(bgSound);
 let gameOverSound = new Audio(gameover);
+let clickSound = new Audio(click);
 
 const getRndInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -26,7 +28,28 @@ class App extends Component {
 
   timer = undefined;
 
+  mutePage = () => {
+    gameStartSound.muted = true;
+    gameOverSound.muted = true;
+    clickSound.muted = true;
+  };
+
+  unMutePage = () => {
+    gameStartSound.muted = false;
+    gameOverSound.muted = false;
+    clickSound.muted = false;
+  };
+
+  clickPlay = () => {
+    if (clickSound.paused) {
+      clickSound.play();
+    } else {
+      clickSound.currentTime = 0;
+    }
+  };
+
   clickHandler = (id) => {
+    this.clickPlay();
     console.log("you clicked: ", id);
 
     if (this.state.current !== id) {
@@ -124,6 +147,14 @@ class App extends Component {
         </div>
         <div className="score">
           <p className="currentscore">Current Score: {this.state.score} </p>
+        </div>
+        <div className="sounds">
+          <button className="muteall" onClick={this.mutePage}>
+            Mute
+          </button>
+          <button className="unmuteall" onClick={this.unMutePage}>
+            Un-mute
+          </button>
         </div>
       </div>
     );
