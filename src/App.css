@@ -124,7 +124,7 @@ button[disabled]:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #5aa824;
+  background-color: #09a7d7;
   background-image: url(./assets/images/background.svg);
   object-fit: contain;
   background-repeat: no-repeat;
