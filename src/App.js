@@ -8,8 +8,8 @@ import gameover from "./assets/sounds/gameover.mp3";
 import bgSound from "./assets/sounds/bg.mp3";
 import click from "./assets/sounds/water.mp3";
 
-import { db } from "./assets/firebase/firebase-config.js";
-import { collection, getDocs, addDoc, Timestamp } from "firebase/firestore";
+// import { db } from "./assets/firebase/firebase-config.js";
+// import { collection, getDocs, addDoc, Timestamp } from "firebase/firestore";
 
 let gameStartSound = new Audio(bgSound);
 let gameOverSound = new Audio(gameover);
@@ -31,7 +31,7 @@ class App extends Component {
     name: "",
   };
 
-  resultsCollectionRef = collection(db, "results");
+  // resultsCollectionRef = collection(db, "results");
   timer = undefined;
 
   mutePage = () => {
@@ -118,31 +118,31 @@ class App extends Component {
     });
   };
 
-  componentDidMount() {
-    this.getResultsFromDB();
-  }
+  // componentDidMount() {
+  //   this.getResultsFromDB();
+  // }
 
-  getResultsFromDB = async () => {
-    const data = await getDocs(this.resultsCollectionRef);
-    this.setState({
-      results: data.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
-    });
-  };
+  // getResultsFromDB = async () => {
+  //   const data = await getDocs(this.resultsCollectionRef);
+  //   this.setState({
+  //     results: data.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+  //   });
+  // };
 
-  addResultToDB = async () => {
-    await addDoc(this.resultsCollectionRef, {
-      name: this.state.name,
-      score: this.state.clickcount,
-      date: Timestamp.fromDate(new Date()),
-    });
-    this.getResultsFromDB();
-  };
+  // addResultToDB = async () => {
+  //   await addDoc(this.resultsCollectionRef, {
+  //     name: this.state.name,
+  //     score: this.state.clickcount,
+  //     date: Timestamp.fromDate(new Date()),
+  //   });
+  //   this.getResultsFromDB();
+  // };
 
-  onSubmitHandler = (event) => {
-    event.preventDefault();
-    this.addResultToDB();
-    this.resetGame();
-  };
+  // onSubmitHandler = (event) => {
+  //   event.preventDefault();
+  //   this.addResultToDB();
+  //   this.resetGame();
+  // };
 
   render() {
     return (
